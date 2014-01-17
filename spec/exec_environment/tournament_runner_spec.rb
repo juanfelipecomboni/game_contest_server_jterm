@@ -1,6 +1,6 @@
 
 require 'spec_helper'
-
+=begin
 
 
 describe "TournamentRunner" do
@@ -30,6 +30,7 @@ describe "TournamentRunner" do
 end
 
 
+=end
 #Run tournament, should create matches and PlayerMatches
 #
 #

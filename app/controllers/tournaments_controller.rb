@@ -72,5 +72,4 @@ class TournamentsController < ApplicationController
           ensure_correct_user(@contest.user_id)
       end
     end
-
 end
