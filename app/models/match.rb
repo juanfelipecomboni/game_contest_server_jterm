@@ -4,6 +4,9 @@ class Match < ActiveRecord::Base
   has_many :player_matches , inverse_of: :match , :dependent => :destroy
   has_many :players, through: :player_matches
 
+  has_many :parent_matches, :class_name => 'MatchPath', :foreign_key => 'child_match_id'
+  has_many :child_matches, :class_name => 'MatchPath', :foreign_key => 'parent_match_id'
+
   validates :manager,           presence: true
   validates :status,            presence: true
   validates :earliest_start,    presence: true, unless: :started?
@@ -37,7 +40,7 @@ class Match < ActiveRecord::Base
     end
 =end
 
-      errors.add(:players, "number of players must equal " + self.manager.referee.players_per_game.to_s + " you have " + self.player_matches.length.to_s + " players") unless self.player_matches.length == self.manager.referee.players_per_game
+      errors.add(:players, "number of players must equal " + self.manager.referee.players_per_game.to_s + " you have " + self.player_matches.length.to_s + " players") unless self.player_matches.length <= self.manager.referee.players_per_game
 
   end
 end
