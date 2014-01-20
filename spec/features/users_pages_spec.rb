@@ -264,7 +264,7 @@ describe "UsersPages" do
     end
 
     describe "as admin" do
-      let (:admin) { FactoryGirl.create(:admin) }
+      let (:admin) { FactoryGirl.create(:admin, username: "NOTME") }
       let!(:user) { FactoryGirl.create(:user) }
 
       before do
@@ -276,22 +276,58 @@ describe "UsersPages" do
       it { should_not have_link('delete', href: user_path(admin)) }
 
       describe "redirects properly", type: :request do
-	before do
-	  login admin, avoid_capybara: true
-	  delete user_path(user)
-	end
+      	before do
+      	  login admin, avoid_capybara: true
+      	  delete user_path(user)
+      	end
 
-	specify { expect(response).to redirect_to(users_path) }
+    	   specify { expect(response).to redirect_to(users_path) }
       end
 
       it "produces a delete message" do
-	click_link('delete', match: :first)
-	should have_alert(:success)
-      end
+    	click_link('delete', match: :first)
+    	should have_alert(:success)
+          end
 
       it "removes a user from the system" do
         expect { click_link('delete', match: :first) }.to change(User, :count).by(-1)
       end
+    end
+  end
+
+  describe "Admin users" do
+    let (:admin) { FactoryGirl.create(:admin, username: "ADMINISTRATOR") }
+    let (:user) { FactoryGirl.create(:user) }
+    let (:submit) { "Log In" }
+    describe "as admin", js: true do
+
+      before do
+        #admin = User.create(username: "Hola", password: "password", password_confirmation: "password", email: "email@c.com", admin: true, contest_creator: true)
+        #visit signup_path
+        #fill_in 'Username', with: "Justin"
+        #fill_in 'Email', with: "justin@j.com"
+        #fill_in 'Password', with: 'p'
+        #fill_in 'Confirmation', with: 'p'
+        #click_button 'Create new account'
+        
+        login admin
+
+
+        visit login_path
+        #fill_in 'Username', with: admin.username
+        #fill_in 'Password', with: admin.password
+        #click_button submit
+        visit users_path
+      end
+
+      it { should have_link('admin', href: "##{user.id}") }
+      it "opens modal" do
+        #expect { click_link('admin', match: :first) }.to 
+        within('#admin-modal-body') do
+          page.should have_content('admin_fields')
+        end
+      end
+      
     end
   end
 end

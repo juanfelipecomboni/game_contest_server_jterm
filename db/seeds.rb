@@ -9,6 +9,4 @@
   ProgrammingLanguage.create(name: lang)
 end
 
-%W(Challenge Tournament Friendly #{'King of the Hill'}).each do |type|
-  MatchType.create(kind: type)
-end
+user = User.create( username: "Hola", password: "password", password_confirmation: "password", email: "email@c.com")
