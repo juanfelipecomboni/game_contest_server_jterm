@@ -78,22 +78,24 @@ private
     end
 
   def ensure_admin
+    puts " C 80"
     @user = User.friendly.find(params[:id])
     request_okay = true
-    unless !current_user?(@user)
-      flash[:danger] = 'Users may not delete themselves.'
-      request_okay = false
-    end
     unless current_user.admin?
       flash[:danger] = 'Only administrators can delete users.'
+      request_okay = false
+    end
+    if current_user?(@user)
+      flash[:danger] = 'Users may not delete themselves.'
       request_okay = false
     end
     redirect_to root_path unless request_okay
   end
 
   def ensure_correct_user_or_admin(user_id = params[:id])
+    puts "C 95"
     @user = User.friendly.find(user_id)
-    unless current_user?(@user) or current_user.admin
+    unless current_user?(@user) or current_user.admin?
       flash[:danger] = 'Unable to edit another user\'s stuff.'
       redirect_to root_path
     end
