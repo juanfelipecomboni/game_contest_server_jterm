@@ -5,9 +5,6 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user_or_admin, only: [:edit, :update]
   before_action :ensure_admin, only: [:destroy]
 
-  def index
-    @users = User.all
-  end
 
   def new
     @user = User.new
@@ -24,8 +21,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.search(params[:search]).paginate(:per_page => 10, :page => params[:page])
+    if @users.length == 0
+      flash.now[:info] = "There were no users that matched your search. Please try again!"
+    end
+  end
+
+
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
   def edit
@@ -57,9 +62,9 @@ class UsersController < ApplicationController
 
 private
 
-    def acceptable_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :email)
-    end
+  def acceptable_params
+    params.require(:user).permit(:username, :password, :password_confirmation, :email)
+  end
 
     def admin_params
       params.require(:user).permit(:banned, :admin, :contest_creator)
@@ -72,19 +77,19 @@ private
       end
     end
 
-    def ensure_admin
-      @user = User.find(params[:id])
-      request_okay = true
-      unless !current_user?(@user)
-	flash[:danger] = 'Users may not delete themselves.'
-	request_okay = false
-      end
-      unless current_user.admin?
-	flash[:danger] = 'Only administrators can delete users.'
-	request_okay = false
-      end
-      redirect_to root_path unless request_okay
+  def ensure_admin
+    @user = User.friendly.find(params[:id])
+    request_okay = true
+    unless !current_user?(@user)
+      flash[:danger] = 'Users may not delete themselves.'
+      request_okay = false
     end
+    unless current_user.admin?
+      flash[:danger] = 'Only administrators can delete users.'
+      request_okay = false
+    end
+    redirect_to root_path unless request_okay
+  end
 
   def ensure_correct_user_or_admin(user_id = params[:id])
     @user = User.find(user_id)

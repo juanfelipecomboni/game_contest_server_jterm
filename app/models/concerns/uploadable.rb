@@ -14,10 +14,12 @@ module Uploadable
       self.file_location = ''
     else
       self.file_location = Rails.root.join('code',
-					   self.class.to_s.downcase.pluralize,
-					   Rails.env,
-					   SecureRandom.hex).to_s
+                                           self.class.to_s.downcase.pluralize,
+                                           Rails.env,
+                                           SecureRandom.hex).to_s
       IO.copy_stream(uploaded_io, self.file_location)
+      system("chmod +x #{self.file_location}")
+      system("dos2unix -q #{self.file_location}")
     end
   end
 
@@ -29,7 +31,7 @@ module Uploadable
 
   private
 
-    def delete_code
-      File.delete(self.file_location) if File.exists?(self.file_location)
-    end
+  def delete_code
+    File.delete(self.file_location) if File.exists?(self.file_location)
+  end
 end

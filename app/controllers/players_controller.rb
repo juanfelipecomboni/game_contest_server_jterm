@@ -3,17 +3,22 @@ class PlayersController < ApplicationController
   before_action :ensure_player_owner, only: [:edit, :update, :destroy]
 
   def index
-    @contest = Contest.find(params[:contest_id])
-    @players = @contest.players
+    @contest = Contest.friendly.find(params[:contest_id])
+    #@players = @contest.players
+    #@referees = Referee.all
+    @players = Player.search(params[:search]).paginate(:per_page => 10, :page => params[:page])
+    if @players.length ==0
+      flash.now[:info] = "There were no players that matched your search. Please try again!"
+    end
   end
 
   def new
-    contest = Contest.find(params[:contest_id])
+    contest = Contest.friendly.find(params[:contest_id])
     @player = contest.players.build
   end
 
   def create
-    contest = Contest.find(params[:contest_id])
+    contest = Contest.friendly.find(params[:contest_id])
     @player = contest.players.build(acceptable_params)
     @player.user = current_user
     if @player.save
@@ -25,7 +30,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = Player.find(params[:id])
+    @player = Player.friendly.find(params[:id])
   end
 
   def edit
@@ -47,12 +52,12 @@ class PlayersController < ApplicationController
 
   private
 
-    def acceptable_params
-      params.require(:player).permit(:name, :description, :downloadable, :playable, :upload)
-    end
+  def acceptable_params
+    params.require(:player).permit(:name, :description, :downloadable, :playable, :upload)
+  end
 
-    def ensure_player_owner
-      @player = Player.find(params[:id])
-      ensure_correct_user(@player.user_id)
-    end
+  def ensure_player_owner
+    @player = Player.friendly.find(params[:id])
+    ensure_correct_user(@player.user_id)
+  end
 end

@@ -6,16 +6,24 @@ GameContestServer::Application.routes.draw do
 
   resources :users
   resources :referees
-  resources :contests do
-    resources :players, shallow: true
-    resources :matches, only: [:show, :index], shallow: true
+  shallow do
+    resources :contests do
+      resources :players
+      resources :tournaments do
+        resources :players
+        resources :matches, only: [:show, :index]
+      end
+    end
   end
+
 
   resources :sessions, only: [:new, :create, :destroy]
 
   get 'signup', to: 'users#new', as: :signup
   get 'login', to: 'sessions#new', as: :login
   delete 'logout', to: 'sessions#destroy', as: :logout
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -56,7 +64,7 @@ GameContestServer::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

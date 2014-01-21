@@ -4,7 +4,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @contest = Contest.find(params[:contest_id])
-    @matches = @contest.matches
+    @tournament = Tournament.friendly.find(params[:tournament_id])
+    @matches = @tournament.matches
   end
 end
