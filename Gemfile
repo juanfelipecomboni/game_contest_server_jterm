@@ -20,6 +20,7 @@ group :development, :test do
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'childprocess'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -30,6 +31,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'active_link_to'
 gem 'validates_timeliness', github: 'softace/validates_timeliness', branch: 'support_for_rails4'
 gem 'friendly_id', '~> 5.0.0'
+
+gem 'database_cleaner'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

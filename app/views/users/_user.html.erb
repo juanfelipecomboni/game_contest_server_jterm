@@ -1,6 +1,28 @@
 <li>
     <%= link_to user.username, user %>
-    <% if current_user and current_user.admin? and !current_user?(user) %>
-        | <%= link_to 'delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if current_user && current_user.admin? %>
+        | <%= link_to 'admin', "##{user.id}", data: {toggle: 'modal'} %>
+	    <% if !current_user?(user) %>
+	        | <%= link_to 'delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+	    <% end %>
     <% end %>
 </li>
+
+<div class = "modal fade" id = "<%= user.id %>" role = "dialog">
+    <div class = "modal-dialog">
+        <div class = "modal-content">
+            <div class = "modal-header">
+                	<h4>Edit Privileges for User: <%= user.username %></h4>
+            </div>
+			<%= form_for(user) do |admin| %>
+	            <div class = "modal-body" id="admin-modal-body">
+					<%= render 'admin_fields', admin: admin %>
+	            </div>
+	            <div class = "modal-footer">
+	                <a class = "btn btn-default" data-dismiss = "modal">Cancel</a>
+	                <%= admin.submit 'Submit', class: 'btn btn-primary' %>
+	            </div>
+        	<% end %>
+        </div>
+    </div>
+</div>

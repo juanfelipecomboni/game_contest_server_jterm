@@ -1,0 +1,14 @@
+<%#= render 'shared/error_messages', object: @user %>
+
+
+<div class='form-group'>   
+    <%= admin.check_box :admin %> <%= admin.label :admin, class: 'control-label' %>
+</div>
+
+<div class='form-group'>
+    <%= admin.check_box :contest_creator %> <%= admin.label :contest_creator, class: 'control-label' %>
+</div>
+
+<div class='form-group'>
+    <%= admin.check_box :banned %> <%= admin.label :banned, class: 'control-label' %>
+</div>
