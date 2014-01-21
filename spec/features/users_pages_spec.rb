@@ -295,7 +295,7 @@ describe "UsersPages" do
     end
   end
 
-  describe "Admin users" do
+  pending "Admin users" do
     let (:admin) { FactoryGirl.create(:admin, username: "ADMINISTRATOR") }
     let (:user) { FactoryGirl.create(:user) }
     let (:submit) { "Log In" }
