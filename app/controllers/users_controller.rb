@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.admin && @user.update(admin_params)
+    if current_user.admin and @user.update(admin_params)
       flash[:success] = "Privilages for #{@user.username} have been changed."
       redirect_to root_path
     elsif @user.update(acceptable_params)

@@ -264,7 +264,7 @@ describe "UsersPages" do
     end
 
     describe "as admin" do
-      let (:admin) { FactoryGirl.create(:admin, username: "NOTME") }
+      let (:admin) { FactoryGirl.create(:admin) }
       let!(:user) { FactoryGirl.create(:user) }
 
       before do

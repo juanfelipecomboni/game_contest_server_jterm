@@ -9,4 +9,3 @@
   ProgrammingLanguage.create(name: lang)
 end
 
-user = User.create( username: "Hola", password: "password", password_confirmation: "password", email: "email@c.com")
