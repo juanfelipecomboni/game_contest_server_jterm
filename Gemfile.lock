@@ -227,8 +227,8 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    will_paginate (3.0.4)
     websocket (1.0.7)
+    will_paginate (3.0.4)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 

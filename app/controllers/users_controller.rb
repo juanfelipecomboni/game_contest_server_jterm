@@ -92,7 +92,7 @@ private
   end
 
   def ensure_correct_user_or_admin(user_id = params[:id])
-    @user = User.find(user_id)
+    @user = User.friendly.find(user_id)
     unless current_user?(@user) or current_user.admin
       flash[:danger] = 'Unable to edit another user\'s stuff.'
       redirect_to root_path
