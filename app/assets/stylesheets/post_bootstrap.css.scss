@@ -1,7 +1,13 @@
 /*
+Justin Southworth
+January 2014
+*/
+
+/*
 This file is for changing Bootstrap default variables.
 It is imported into js_color_scheme AFTER Bootsrap is
-loaded, so the classes are not overridden.
+loaded, so these classes are not overridden.
+Used to customize Bootstrap's classes.
 */
 
 
@@ -43,11 +49,12 @@ body {
 .field_with_errors {
 //  Stops datetime_select in form_for from moving to
 //  new line when it's an error field
+//  Possibly not needed any more
     display: inline;
 }
 
 
-// Allows for styling of datetime selectors
+// Corrects styling of datetime selectors (with code below)
 .date-time{
     @extend .form-control;
     display: inline;
@@ -76,6 +83,7 @@ body {
 }
 
 // Form text areas should only resize vertically
+// to stay within containers
 form textarea {
     resize: vertical;
 }
