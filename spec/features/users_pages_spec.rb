@@ -449,13 +449,11 @@ describe "UsersPages" do
       end
 
       it { should have_link('admin', href: "##{user.id}") }
-      #check for visible modal when admin link is clicked
-      #check that the checkboxes match the database boolean for the given user.
-      #check for modal invisible upon submission or cancel
-      #check for correct submission
-      #check for modal invisible upon submission or cancel
-        end
-      end  
+       #check for visible modal when admin link is clicked
+       #check that the checkboxes match the database boolean for the given user.
+       #check for modal invisible upon submission or cancel
+       #check for correct submission
+       #check for modal invisible upon submission or cancel
+      end
     end
-  end
 end
