@@ -19,6 +19,10 @@ describe "UsersPages" do
       end
 
       it "produces an error message" do
+        puts
+	puts "************** BODY ***************"
+	puts page.body
+	puts
         click_button submit
         should have_alert(:danger)
       end
@@ -432,4 +436,24 @@ describe "UsersPages" do
       end
     end
   end
+
+  pending "Admin users" do
+    let (:admin) { FactoryGirl.create(:admin, username: "ADMINISTRATOR") }
+    let (:user) { FactoryGirl.create(:user) }
+    let (:submit) { "Log In" }
+    describe "as admin", js: true do
+
+      before do
+        login admin
+        visit users_path
+      end
+
+      it { should have_link('admin', href: "##{user.id}") }
+       #check for visible modal when admin link is clicked
+       #check that the checkboxes match the database boolean for the given user.
+       #check for modal invisible upon submission or cancel
+       #check for correct submission
+       #check for modal invisible upon submission or cancel
+      end
+    end
 end
