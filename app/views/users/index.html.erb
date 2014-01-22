@@ -9,7 +9,7 @@
 
     <h3><%= pluralize(@users.length, 'user') %></h3>
     <div id= "pagination">
-        <li><%= render @users %></li>
+        <%= render @users %>
     </div>
 
     <%= will_paginate %>
