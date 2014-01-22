@@ -444,32 +444,18 @@ describe "UsersPages" do
     describe "as admin", js: true do
 
       before do
-        #admin = User.create(username: "Hola", password: "password", password_confirmation: "password", email: "email@c.com", admin: true, contest_creator: true)
-        #visit signup_path
-        #fill_in 'Username', with: "Justin"
-        #fill_in 'Email', with: "justin@j.com"
-        #fill_in 'Password', with: 'p'
-        #fill_in 'Confirmation', with: 'p'
-        #click_button 'Create new account'
-        
         login admin
-
-
-        visit login_path
-        #fill_in 'Username', with: admin.username
-        #fill_in 'Password', with: admin.password
-        #click_button submit
         visit users_path
       end
 
       it { should have_link('admin', href: "##{user.id}") }
-      it "opens modal" do
-        #expect { click_link('admin', match: :first) }.to 
-        within('#admin-modal-body') do
-          page.should have_content('admin_fields')
+      #check for visible modal when admin link is clicked
+      #check that the checkboxes match the database boolean for the given user.
+      #check for modal invisible upon submission or cancel
+      #check for correct submission
+      #check for modal invisible upon submission or cancel
         end
-      end
-      
+      end  
     end
   end
 end
