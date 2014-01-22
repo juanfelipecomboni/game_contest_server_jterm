@@ -120,18 +120,3 @@ player1_tournament = PlayerTournament.create!(player: player1, tournament: tourn
 player2_tournament = PlayerTournament.create!(player: player2, tournament: tournament)
 player3_tournament = PlayerTournament.create!(player: player3, tournament: tournament)
 
-tournament2 = Tournament.create!(
-  contest: contest,
-  name: "Single Elimination Test Tournament",
-  start: Time.now + 10.seconds,
-  tournament_type: "single elimination",
-  status: "waiting"
-)
-player1_tournament2 = PlayerTournament.create!(player: player1, tournament: tournament2)
-player2_tournament2 = PlayerTournament.create!(player: player2, tournament: tournament2)
-player3_tournament2 = PlayerTournament.create!(player: player3, tournament: tournament2)
-player4_tournament2 = PlayerTournament.create!(player: player4, tournament: tournament2)
-player5_tournament2 = PlayerTournament.create!(player: player5, tournament: tournament2)
-player6_tournament2 = PlayerTournament.create!(player: player6, tournament: tournament2)
-player7_tournament2 = PlayerTournament.create!(player: player7, tournament: tournament2)
-
