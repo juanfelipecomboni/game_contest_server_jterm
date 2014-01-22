@@ -133,7 +133,7 @@ describe User do
 
   describe "admin capabilities" do
     let(:admin) { FactoryGirl.create(:admin) }
-
+    
     specify { expect(admin).to be_admin }
   end
 
