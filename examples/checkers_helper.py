@@ -4,16 +4,10 @@
 #Alex Sjoberg
 #Jan 2014
 # Libary for COS 120 student checker program
-#When started, sends name to port provided
 
-
-
-
-#imports
 from optparse import OptionParser
 import socket
 import pickle
-
 
 automatedMove = None
 
@@ -43,6 +37,4 @@ parser.add_option("-p","--port",action="store",type="int",dest="port")
 parser.add_option("-n","--name" ,action="store",type="string",dest="name")
 
 (options, args) = parser.parse_args()
-
-#To be run on import
 

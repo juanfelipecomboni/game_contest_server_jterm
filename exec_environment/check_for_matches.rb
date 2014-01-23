@@ -17,6 +17,6 @@ if not match.nil? then
         puts "  Daemon spawning match #"+match.id.to_s
         Process.spawn("rails runner exec_environment/match_runner.rb -m #{match.id}")
     rescue
-        puts "Database was locked. Will retry next time."
+        puts "  Database was locked while attempting to save match #"+match.id.to_s+". Will retry next time."
     end
 end
