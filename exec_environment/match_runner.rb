@@ -4,7 +4,7 @@
 #match_runner.rb
 #Jan 2014
 #
-#Takes a match_id and 
+#Takes a match_id and runs that match; writes results to database
 
 require 'active_record'
 require 'active_support/time'
@@ -114,8 +114,8 @@ class MatchRunner
         #Change status of match if necessary
         if match.players.count == @number_of_players
             match.status = "waiting"
+            match.save!
         end
-        match.save!
     end
 end 
 
