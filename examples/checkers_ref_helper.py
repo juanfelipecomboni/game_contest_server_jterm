@@ -66,17 +66,17 @@ while P2_name == "":
     P2_name = conn2.recv(1024).decode()
 P2 = PlayerConnection(conn2,addr1,P2_name)
 
-
+#Reports results back to match_wrapper; called from checkers_ref
 def report_results(p1wins,p2wins):
-    p1result = "Win"
-    p2result = "Loss"
-    if p2wins >= p1wins:
-        if p2wins != p1wins:
-            p1result = "Loss"
-            p2result = "Win"
-        else:
-            p1result = "Tie"
-            p2result = "Tie"
+    if p1wins > p2wins:
+        p1result = "Win"
+        p2result = "Loss"
+    elif p2wins > p1wins:
+        p1result = "Loss"
+        p2result = "Win"
+    else:
+        p1result = "Tie"
+        p2result = "Tie"
     result_string = P1_name + "|" + p1result + "|" + str(p1wins)
     wrapper_socket.send((result_string+"\n").encode())
     result_string = P2_name + "|" + p2result + "|" + str(p2wins)

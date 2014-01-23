@@ -12,7 +12,10 @@ require './config/environment'
 tournament = Tournament.where("start < ? and status = ?", Time.now.utc, "waiting").first
 if not tournament.nil? then
     tournament.status = "started"
-    tournament.save
-    puts "Daemon spawning tournament #"+tournament.id.to_s
-    Process.spawn("rails runner exec_environment/tournament_runner.rb -t #{tournament.id}")
+    begin
+        tournament.save
+        puts "Daemon spawning tournament #"+tournament.id.to_s
+        Process.spawn("rails runner exec_environment/tournament_runner.rb -t #{tournament.id}")
+    rescue
+        puts "Database was locked while attempting to save tournament #"+tournament.id.to_s+". Will retry next time."
 end
