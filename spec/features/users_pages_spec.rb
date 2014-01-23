@@ -19,10 +19,6 @@ describe "UsersPages" do
       end
 
       it "produces an error message" do
-        puts
-	puts "************** BODY ***************"
-	puts page.body
-	puts
         click_button submit
         should have_alert(:danger)
       end
