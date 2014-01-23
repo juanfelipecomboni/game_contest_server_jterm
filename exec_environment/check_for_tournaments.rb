@@ -18,4 +18,5 @@ if not tournament.nil? then
         Process.spawn("rails runner exec_environment/tournament_runner.rb -t #{tournament.id}")
     rescue
         puts "Database was locked while attempting to save tournament #"+tournament.id.to_s+". Will retry next time."
+    end
 end
