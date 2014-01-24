@@ -98,3 +98,16 @@ VII. Known Bugs
     - Children are not being reaped properly in many cases in match_wrapper.rb
     - Occasionally when running lots of games, the db will be locked and we will fail to write the results
     - Checkers needs a max number of moves or too many games time out
+
+    - tournament_runner uses "@tournament.find(:foo)" at one point, which
+      should be erroring, as it should be "@tournament.friendly.find(:foo)".
+      But we didn't have time to try to change and test it.
+
+    - Because FriendlyID turns a username of "Contest Creator" into a slug of
+      "contest-creator" the uniquness validation for usernames and other slugs
+      must ensure there cannot be a username of "student 1" and another of
+      "studENT-1" or "Student 1", etc, because they will have the same slug"
+          - Oh, and slugs can't start with a number, or else Friendly thinks
+            it's an ID rather than the slug. (Or perhaps not have an integer at all)
+
+    - Match_Path has no tests. Shouldn't be hard or long, but just not done.
