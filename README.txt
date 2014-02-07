@@ -94,7 +94,8 @@ VI. Future Work
     - Add download player functionality
 
 VII. Known Bugs
-    - Round Robin tournaments are currently never set to completed. Need a way to check that all matches are completed and set tournament status
+    - Round Robin tournaments are currently never set to completed. Need a way to check that all matches are
+        completed and set tournament status
     - Children are not being reaped properly in many cases in match_wrapper.rb
     - Occasionally when running lots of games, the db will be locked and we will fail to write the results
     - Checkers needs a max number of moves or too many games time out
@@ -111,3 +112,12 @@ VII. Known Bugs
             it's an ID rather than the slug. (Or perhaps not have an integer at all)
 
     - Match_Path has no tests. Shouldn't be hard or long, but just not done.
+    - Same with the new admin functionality. Tests aren't yet written
+    
+    - Possible bugs in tests
+        - features/users_pages_spec seems to be weaker than most features specs
+            - doesn't restrict straight requests, so people could make themselves admin, contest creator, etc.
+        - Some edit tests may not be changing the data. So it isn't really testing anything.
+        - Other edit tests are changing it to invalid data, which will fail because it's invalid
+            rather than because we aren't allowing it to.
+        - Maybe a problem with showing player on contests and tournament tests
